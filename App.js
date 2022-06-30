@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 
 const intialValue = [
-  { name: 'Apple', id: '1' },
-  { name: 'Banana', id: '2' },
-  { name: 'Mango', id: '3' },
-  { name: 'Pear', id: '4' },
-  { name: 'Grape', id: '5' },
-  { name: 'Litchi', id: '6' },
-  { name: 'Peach', id: '7' },
-  { name: 'Cabbage', id: '8' },
-  { name: 'Potato', id: '9' },
+  { name: 'Apple', key: '1' },
+  { name: 'Banana', key: '2' },
+  { name: 'Mango', key: '3' },
+  { name: 'Pear', key: '4' },
+  { name: 'Grape', key: '5' },
+  { name: 'Litchi', key: '6' },
+  { name: 'Peach', key: '7' },
+  { name: 'Cabbage', key: '8' },
+  { name: 'Potato', key: '9' },
 ]
+
+/**
+ * FlatList will directly look for key property
+ */
 
 export default function App() {
 
@@ -19,15 +23,14 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-      { 
-        fruit && fruit.map((item) => (
-          <View style={styles.list} key={item.id}>
-            <Text style={styles.item}>{item.name}</Text>
-          </View>
-        )) 
-      }
-      </ScrollView>
+
+      <FlatList
+        data={fruit}
+        renderItem={({ item }) => (
+          <Text style={styles.item}>{item.name}</Text>
+        )}
+      />
+
     </View>
   );
 }
