@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 const intialValue = [
   { name: 'Apple', id: '1' },
@@ -21,6 +21,10 @@ export default function App() {
 
   const [ fruit, setFruit ] = useState(intialValue)
 
+  const pressHandler = (id) => setFruit((prevFruit) => {
+    return prevFruit.filter(fruit => fruit.id !== id)
+  })
+
   return (
     <View style={styles.container}>
 
@@ -29,7 +33,9 @@ export default function App() {
         keyExtractor={(item) => item.id}
         data={fruit}
         renderItem={({ item }) => (
-          <Text style={styles.item}>{item.name}</Text>
+          <TouchableOpacity onPress={() => pressHandler(item.id)}>
+            <Text style={styles.item}>{item.name}</Text>
+          </TouchableOpacity>
         )}
       />
 
