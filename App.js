@@ -1,30 +1,33 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
+
+const intialValue = [
+  { name: 'Apple', id: '1' },
+  { name: 'Banana', id: '2' },
+  { name: 'Mango', id: '3' },
+  { name: 'Pear', id: '4' },
+  { name: 'Grape', id: '5' },
+  { name: 'Litchi', id: '6' },
+  { name: 'Peach', id: '7' },
+  { name: 'Cabbage', id: '8' },
+  { name: 'Potato', id: '9' },
+]
 
 export default function App() {
 
-  const [name, setName] = useState('Sachin Kiranti')
-  const [age, setAge] = useState('28')
+  const [ fruit, setFruit ] = useState(intialValue)
 
   return (
     <View style={styles.container}>
-      <Text>My name is {name} and age is {age}.</Text>
-
-      <Text>Enter Name :</Text>
-
-      <TextInput
-        multiline
-        onChangeText={(val) => setName(val)}
-        placeholder='Enter your name e.g. John Doe' 
-        style={styles.input} />
-
-      <Text>Enter Age :</Text>
-
-      <TextInput
-        keyboardType='numeric'
-        onChangeText={(val) => setAge(val)}
-        placeholder='Enter your age e.g. 20'
-        style={styles.input} />
+      <ScrollView>
+      { 
+        fruit && fruit.map((item) => (
+          <View style={styles.list} key={item.id}>
+            <Text style={styles.item}>{item.name}</Text>
+          </View>
+        )) 
+      }
+      </ScrollView>
     </View>
   );
 }
@@ -33,16 +36,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'green'
+    paddingTop: 40,
+    paddingHorizontal: 20,
+    paddingBottom: 20
   },
 
-  input: {
-    borderWidth: 1,
-    borderColor: '#777',
-    padding: 8,
-    margin: 10,
-    width: '95%'
+  item: {
+    marginTop: 24,
+    padding: 30,
+    backgroundColor: 'black',
+    fontSize: 24,
+    color: 'white'
   }
 });
